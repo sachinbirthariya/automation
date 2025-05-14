@@ -1,6 +1,6 @@
 - name: Gather VMware facts
-  hosts: localhost
-  gather_facts: no
+  hosts: 192.168.121.143
+  gather_facts: yes
   collections:
     - community.vmware
   tasks:
