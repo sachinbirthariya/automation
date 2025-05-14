@@ -1,0 +1,23 @@
+---
+- name: Fetch Datastore Details from ESXi Host
+  hosts: your_esxi_host  # Replace with the hostname or IP address of your ESXi host
+  gather_facts: false
+
+  vars:
+    vmware_host: "{{ 192.168.121.143 }}"
+    vmware_user: "root"  # Replace with your ESXi username
+    vmware_password: "VMware1234!"  # Replace with your ESXi password
+    validate_certs: false  # Set to true if you have valid SSL certificates
+
+  tasks:
+    - name: Gather Datastore Facts
+      community.vmware.vmware_datastore_facts:
+        hostname: "{{ vmware_host }}"
+        username: "{{ vmware_user }}"
+        password: "{{ vmware_password }}"
+        validate_certs: "{{ validate_certs }}"
+      register: datastore_facts
+
+    - name: Display Datastore Details
+      debug:
+        var: datastore_facts.datastores
